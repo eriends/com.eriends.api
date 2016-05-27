@@ -11,19 +11,16 @@ import (
 )
 
 var cfg Config
+var logo string
 
 func main() {
-	load_conf()
+	LoadConf()
+	LoadLogo()
+	router := CreateRouter()
+	Start(router)
+}
 
-	router := mux.NewRouter().StrictSlash(true)
-	router.HandleFunc("/", Index)
-
-	logo, err := ioutil.ReadFile("conf/logo")
-	if err != nil {
-		panic(err)
-	}
-	fmt.Println(string(logo))
-
+func Start(router *mux.Router) {
 	addr := fmt.Sprintf("%s:%d", cfg.Listen.Ip, cfg.Listen.Port)
 	server := &http.Server{
 		Addr:    addr,
@@ -42,10 +39,16 @@ type Config struct {
 	Listen ListenStruct
 }
 
-func load_conf() {
-	var err error
-	err = gcfg.ReadFileInto(&cfg, "conf/eriends.ini")
+func LoadConf() {
+	err := gcfg.ReadFileInto(&cfg, "conf/eriends.ini")
 	PanicOnError(err)
+}
+
+func LoadLogo() {
+	_logo, err := ioutil.ReadFile("conf/logo")
+	PanicOnError(err)
+	logo = string(_logo)
+	fmt.Println(logo)
 }
 
 func PanicOnError(err error) {
@@ -54,6 +57,3 @@ func PanicOnError(err error) {
 	}
 }
 
-func Index(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Welcome to Eriends!")
-}

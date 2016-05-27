@@ -20,7 +20,6 @@ run:
 init:
 	export GOPATH=${ROOT_DIR}
 	$(GO) get github.com/gorilla/mux
-	$(GO) get github.com/go-ini/ini
 	$(GO) get gopkg.in/gcfg.v1
 
 celan:
