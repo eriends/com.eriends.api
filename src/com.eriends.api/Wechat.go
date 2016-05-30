@@ -13,11 +13,11 @@ import (
 )
 
 const (
-	ORIID 					= "gh_1b42ae1dabbd"
-	APPID 					= "wx0677f787bf067135"
-	APPSECRET 			= "384f19db6203cc27de60c0eaf5395119"          
- 	TOKEN 					= "blueantelope"
-	BASE64AESKEY 		= "pr9P8viyjRM2QncgaCwFactM3WbgSuelSKNarJotq2v"
+	ORIID	= "gh_1b42ae1dabbd"
+	APPID = "wx0677f787bf067135"
+	APPSECRET = "384f19db6203cc27de60c0eaf5395119"          
+ 	TOKEN	= "blueantelope"
+	BASE64AESKEY = "pr9P8viyjRM2QncgaCwFactM3WbgSuelSKNarJotq2v"
 )
 
 func Wechat(w http.ResponseWriter, r *http.Request) {
@@ -42,9 +42,10 @@ func textMsgHandler(ctx *core.Context) {
 	log.Printf("收到文本消息:\n%s\n", ctx.MsgPlaintext)
 
 	msg := request.GetText(ctx.MixedMsg)
-	resp := response.NewText(msg.FromUserName, msg.ToUserName, msg.CreateTime, msg.Content)
-	//ctx.RawResponse(resp) // 明文回复
-	ctx.AESResponse(resp, 0, "", nil) // aes密文回复
+	//resp := response.NewText(msg.FromUserName, msg.ToUserName, msg.CreateTime, msg.Content)
+	resp := response.NewText(msg.FromUserName, msg.ToUserName, msg.CreateTime, "欢迎来访问，Eriends")
+	ctx.RawResponse(resp) // 明文回复
+	//ctx.AESResponse(resp, 0, "", nil) // aes密文回复
 }
 
 func defaultMsgHandler(ctx *core.Context) {
