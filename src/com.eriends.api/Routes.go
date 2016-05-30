@@ -39,6 +39,12 @@ var routes = Routes{
 		"/wechat",
 		Wechat,
 	},
+	Route {
+		"WechatCallback",
+		"GET",
+		"/wechat_callback",
+		WechatCallback,
+	},
 }
 
 var router mux.Router
