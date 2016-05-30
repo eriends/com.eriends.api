@@ -45,6 +45,12 @@ var routes = Routes{
 		"/wechat_callback",
 		WechatCallback,
 	},
+	Route {
+		"WechatGetUserList",
+		"GET",
+		"/wechat/user/list",
+		WechatGetUserList,
+	},
 }
 
 var router mux.Router

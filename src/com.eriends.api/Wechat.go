@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"net/http"
 	"github.com/chanxuehong/wechat.v2/mp/core"
-	"github.com/chanxuehong/wechat.v2/mp/base"
 	"github.com/chanxuehong/wechat.v2/mp/user"
 )
 
@@ -14,8 +13,6 @@ const (
 	APPSECRET 			= "384f19db6203cc27de60c0eaf5395119"          
  	TOKEN 					= "blueantelope"
 	BASE64AESKEY 		= "pr9P8viyjRM2QncgaCwFactM3WbgSuelSKNarJotq2v"
- 	HANDLER 				= mux
- 	ERRORHANDLER 		= nil
 )
 
 func Wechat(w http.ResponseWriter, r *http.Request) {
@@ -24,23 +21,17 @@ func Wechat(w http.ResponseWriter, r *http.Request) {
 
 func WechatCallback(w http.ResponseWriter, r *http.Request) {
 	mux := core.NewServeMux()
-	srv := core.NewServer(ORIID, APPID, TOKEN, BASE64AESKEY, HANDLER, ERRORHANDLER)
+	srv := core.NewServer(ORIID, APPID, TOKEN, BASE64AESKEY, mux, nil)
 	srv.ServeHTTP(w, r, nil)
 }
 
-const (
-	wxAppId					=  APPID
-	wxAppSecret			= "appsecret"
-	wxOriId         = "oriid"
-	wxToken         = "token"
-	wxEncodedAESKey = "aeskey"
+var (
+	accessTokenServer core.AccessTokenServer = core.NewDefaultAccessTokenServer(APPID, APPSECRET, nil)
+	wechatClient *core.Client = core.NewClient(accessTokenServer, nil)	
 )
 
-func GetUserList(w http.ResponseWriter, r *http.Request) {
-	accessTokenServer core.AccessTokenServer = core.NewDefaultAccessTokenServer(APPDI, APPSECRET, nil)
-	wechatClient *core.Client = core.NewClient(accessTokenServer, nil)	
-	userList := user.list(wechatClient, "")
+func WechatGetUserList(w http.ResponseWriter, r *http.Request) {
+	userList := user.List(wechatClient, "")
 	fmt.Println("user total: ", len(userList))
 }
-
 
