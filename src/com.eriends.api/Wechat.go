@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"github.com/chanxuehong/wechat.v2/mp/core"
+	"github.com/chanxuehong/wechat.v2/mp/base"
 	"github.com/chanxuehong/wechat.v2/mp/user"
 )
 
@@ -38,4 +39,9 @@ func WechatGetUserList(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("user list: ", userList)
 }
 
-
+func WechatGetServerIp(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Get Server Ip")
+	ipList, err := base.GetCallbackIP(wechatClient)
+	PrintError(err)
+	fmt.Println("server ip list: ", ipList)
+}

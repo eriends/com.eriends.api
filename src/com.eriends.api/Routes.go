@@ -51,6 +51,12 @@ var routes = Routes{
 		"/wechat/users",
 		WechatGetUserList,
 	},
+	Route {
+		"WechatGetServerIp",
+		"GET",
+		"/wechat/server/ips",
+		WechatGetServerIp,
+	},
 }
 
 var router mux.Router
