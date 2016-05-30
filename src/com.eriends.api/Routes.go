@@ -8,7 +8,7 @@ import (
 
 type Route struct {
 	Name        string
-	Method      string
+	Methods     []string
 	Pattern     string
 	HandlerFunc http.HandlerFunc
 }
@@ -17,49 +17,49 @@ type Routes []Route
 var routes = Routes{
 	Route {
 		"Index",
-		"GET",
+		[]string{"GET"},
 		"/",
 		Index,
 	},
 	Route {
 		"Api",
-		"GET",
+		[]string{"GET"},
 		"/api",
 		Api,
 	},
 	Route {
 		"ApiId",
-		"GET",
+		[]string{"GET"},
 		"/api/{apiId}",
 		ApiId,
 	},
 	Route {
 		"Wechat",
-		"GET",
+		[]string{"GET"},
 		"/wechat",
 		Wechat,
 	},
 	Route {
 		"WechatCallback",
-		"GET",
+		[]string{"GET", "POST"},
 		"/wechat/callback",
 		WechatCallback,
 	},
 	Route {
 		"WechatGetUserList",
-		"GET",
+		[]string{"GET"},
 		"/wechat/users",
 		WechatGetUserList,
 	},
 	Route {
 		"WechatGetServerIp",
-		"GET",
+		[]string{"GET"},
 		"/wechat/server/ips",
 		WechatGetServerIp,
 	},
 	Route {
 		"WechatGetMessage",
-		"GET",
+		[]string{"GET"},
 		"/wechat/message",
 		WechatGetMessage,
 	},
@@ -71,7 +71,7 @@ func CreateRouter() *mux.Router {
 	router := mux.NewRouter().StrictSlash(true)
 	for _, route := range routes {
 		router.
-			Methods(route.Method).
+			Methods(route.Methods...).
 			Path(route.Pattern).
 			Name(route.Name).
 			Handler(route.HandlerFunc)

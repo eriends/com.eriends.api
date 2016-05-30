@@ -22,9 +22,11 @@ func Wechat(w http.ResponseWriter, r *http.Request) {
 }
 
 func WechatCallback(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("wechat callback")
 	mux := core.NewServeMux()
 	srv := core.NewServer(ORIID, APPID, TOKEN, BASE64AESKEY, mux, nil)
 	srv.ServeHTTP(w, r, nil)
+	fmt.Println(r)
 }
 
 var (
@@ -49,7 +51,9 @@ func WechatGetServerIp(w http.ResponseWriter, r *http.Request) {
 
 func WechatGetMessage(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Get Server Message")
+
 	var mixedMsg = &core.MixedMsg{}
+
 	var message = request.GetText(mixedMsg)
 	fmt.Println(message)
 }
