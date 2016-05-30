@@ -6,6 +6,7 @@ import (
 	"github.com/chanxuehong/wechat.v2/mp/core"
 	"github.com/chanxuehong/wechat.v2/mp/base"
 	"github.com/chanxuehong/wechat.v2/mp/user"
+	"github.com/chanxuehong/wechat.v2/mp/message/callback/request"
 )
 
 const (
@@ -44,4 +45,11 @@ func WechatGetServerIp(w http.ResponseWriter, r *http.Request) {
 	ipList, err := base.GetCallbackIP(wechatClient)
 	PrintError(err)
 	fmt.Println("server ip list: ", ipList)
+}
+
+func WechatGetMessage(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Get Server Message")
+	var mixedMsg = &core.MixedMsg{}
+	var message = request.GetText(mixedMsg)
+	fmt.Println(message)
 }
