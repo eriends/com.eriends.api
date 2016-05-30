@@ -5,10 +5,6 @@ import (
 	"net/http"
 )
 
-func Index(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Welcome to Eriends!")
-}
-
 func Api(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Cache-Control", "no-cache, must-revalidate")
 	w.WriteHeader(http.StatusOK)

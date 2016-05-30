@@ -33,6 +33,12 @@ var routes = Routes{
 		"/api/{apiId}",
 		ApiId,
 	},
+	Route {
+		"Wechat",
+		"GET",
+		"/wechat",
+		Wechat,
+	},
 }
 
 var router mux.Router

@@ -21,6 +21,8 @@ init:
 	export GOPATH=${ROOT_DIR}
 	$(GO) get github.com/gorilla/mux
 	$(GO) get gopkg.in/gcfg.v1
+	$(GO) get github.com/chanxuehong/wechat.v2 
+	$(GO) get github.com/chanxuehong/util/security
 
 celan:
 	$(RM) -r ${BIN_DIR}
