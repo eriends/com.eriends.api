@@ -31,7 +31,10 @@ var (
 )
 
 func WechatGetUserList(w http.ResponseWriter, r *http.Request) {
-	userList := user.List(wechatClient, "")
-	fmt.Println("user total: ", len(userList))
+	fmt.Println("Get User List")
+	userList, err := user.List(wechatClient, "")
+	PrintError(err)
+	fmt.Println("user list: ", userList)
 }
+
 

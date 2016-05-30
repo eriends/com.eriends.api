@@ -48,7 +48,7 @@ var routes = Routes{
 	Route {
 		"WechatGetUserList",
 		"GET",
-		"/wechat/user/list",
+		"/wechat/users",
 		WechatGetUserList,
 	},
 }
