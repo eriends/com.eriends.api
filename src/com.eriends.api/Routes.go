@@ -42,7 +42,7 @@ var routes = Routes{
 	Route {
 		"WechatCallback",
 		"GET",
-		"/wechat_callback",
+		"/wechat/callback",
 		WechatCallback,
 	},
 	Route {
