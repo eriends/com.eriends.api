@@ -15,47 +15,53 @@ type Route struct {
 type Routes []Route
 
 var routes = Routes{
-	Route {
+	Route{
 		"Index",
 		[]string{"GET"},
 		"/",
 		Index,
 	},
-	Route {
+	Route{
 		"Api",
 		[]string{"GET"},
 		"/api",
 		Api,
 	},
-	Route {
+	Route{
 		"ApiId",
 		[]string{"GET"},
 		"/api/{apiId}",
 		ApiId,
 	},
-	Route {
+	Route{
 		"Wechat",
 		[]string{"GET"},
 		"/wechat",
 		Wechat,
 	},
-	Route {
+	Route{
 		"WechatCallback",
 		[]string{"GET", "POST"},
 		"/wechat/callback",
 		WechatCallback,
 	},
-	Route {
+	Route{
 		"WechatGetUserList",
 		[]string{"GET"},
 		"/wechat/users",
 		WechatGetUserList,
 	},
-	Route {
+	Route{
 		"WechatGetServerIp",
 		[]string{"GET"},
 		"/wechat/server/ips",
 		WechatGetServerIp,
+	},
+	Route{
+		"WechatOauthPage",
+		[]string{"GET"},
+		"/wechat/oauth",
+		WechatOauthPage,
 	},
 }
 
@@ -73,4 +79,3 @@ func CreateRouter() *mux.Router {
 
 	return router
 }
-
